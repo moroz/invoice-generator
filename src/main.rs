@@ -1,22 +1,18 @@
-use std::env;
-use std::fs;
+use std::fs::File;
 use std::io;
-use std::path::PathBuf;
+use std::io::BufReader;
 
 pub mod invoice_data;
+pub mod renderer;
 
-fn resolve_out_dir() -> io::Result<PathBuf> {
-    let cwd = env::current_dir()?;
-    let default = PathBuf::from("/");
-    let parent = cwd.parent().unwrap_or(&default);
-    Ok(parent.join("out"))
-}
+use invoice_data::InvoiceData;
+use renderer::renderer::render_invoice_template;
 
 fn main() -> io::Result<()> {
-    let path = resolve_out_dir()?;
-    println!("{:?}", path);
-    fs::create_dir_all(path)?;
-    println!("Hello, world!");
+    let source = File::open("./data/sample.json")?;
+    let buf_reader = BufReader::new(source);
+    let data: InvoiceData = serde_json::from_reader(buf_reader)?;
+    render_invoice_template(data)?;
 
     Ok(())
 }

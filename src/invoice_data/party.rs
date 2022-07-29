@@ -2,11 +2,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Party {
-    name: String,
-    tax_id: Option<String>,
-    address_first_line: String,
-    address_city: String,
-    address_zip_code: String,
+    pub name: String,
+    pub tax_id: Option<String>,
+    pub address_first_line: String,
+    pub address_city: String,
+    pub address_zip_code: String,
 }
 
 #[test]

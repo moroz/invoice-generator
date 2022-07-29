@@ -4,9 +4,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct InvoiceData {
-    items: Vec<InvoiceItem>,
-    seller: Party,
-    buyer: Party,
+    pub items: Vec<InvoiceItem>,
+    pub seller: Party,
+    pub buyer: Party,
 }
 
 #[test]
