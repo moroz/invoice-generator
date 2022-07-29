@@ -3,6 +3,8 @@ use std::fs;
 use std::io;
 use std::path::PathBuf;
 
+pub mod invoice_data;
+
 fn resolve_out_dir() -> io::Result<PathBuf> {
     let cwd = env::current_dir()?;
     let default = PathBuf::from("/");
