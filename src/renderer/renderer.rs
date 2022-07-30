@@ -7,6 +7,7 @@ use std::fs;
 use std::fs::File;
 use std::io;
 use std::path::PathBuf;
+use std::process::Command;
 
 fn resolve_out_dir() -> io::Result<PathBuf> {
     let cwd = env::current_dir()?;
@@ -58,4 +59,15 @@ pub fn render_invoice_template(data: InvoiceData) -> io::Result<PathBuf> {
         .unwrap();
 
     Ok(file_name)
+}
+
+pub fn compile_latex_file(path: PathBuf) -> io::Result<()> {
+    let outdir = resolve_out_dir()?;
+    let outdir = &outdir.as_path().display();
+    let job = path.as_path().display();
+    Command::new("xelatex")
+        .arg(format!("-output-dir={}", outdir))
+        .arg(format!("{}", job))
+        .output()?;
+    Ok(())
 }
