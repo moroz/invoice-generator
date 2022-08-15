@@ -1,5 +1,16 @@
 \documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont[Mapping=tex-text]{Arial Unicode MS}
 
 \begin{document}
-{{buyer.name}}
+{{ currency }}
+
+Sold on: {{ sold_on }}
+
+Invoice issued at: {{ issued_at }}
+
+Buyer:\\
+{{ buyer.name }}\\
+{{ buyer.address_first_line }}\\
+{{ buyer.address_zip_code }} {{ buyer.address_city }}
 \end{document}

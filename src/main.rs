@@ -13,6 +13,7 @@ fn main() -> io::Result<()> {
     let buf_reader = BufReader::new(source);
     let data: InvoiceData = serde_json::from_reader(buf_reader)?;
     let path = Renderer::render_invoice_template(data)?;
+    println!("Writing to file {}", path.display());
     Renderer::compile_latex_file(path)?;
 
     Ok(())

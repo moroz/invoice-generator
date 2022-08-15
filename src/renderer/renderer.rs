@@ -10,9 +10,9 @@ use std::path::PathBuf;
 use std::process::Command;
 
 fn resolve_out_dir() -> io::Result<PathBuf> {
-    let cwd = env::current_dir()?;
+    let cwd = env::current_dir();
     let default = PathBuf::from("/");
-    let parent = cwd.parent().unwrap_or(&default);
+    let parent = cwd.unwrap_or(default);
     Ok(parent.join("out"))
 }
 
@@ -43,6 +43,10 @@ fn prepare_assigns(invoice_data: &InvoiceData) -> Map<String, Json> {
     let mut data = Map::new();
 
     data.insert("buyer".to_string(), to_json(&invoice_data.buyer));
+    data.insert("seller".to_string(), to_json(&invoice_data.seller));
+    data.insert("currency".to_string(), to_json(&invoice_data.currency));
+    data.insert("sold_on".to_string(), to_json(&invoice_data.sold_on));
+    data.insert("issued_at".to_string(), to_json(&invoice_data.issued_at));
 
     data
 }
