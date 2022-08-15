@@ -1,5 +1,6 @@
 use crate::invoice_data::InvoiceItem;
 use crate::invoice_data::Party;
+use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -7,12 +8,18 @@ pub struct InvoiceData {
     pub items: Vec<InvoiceItem>,
     pub seller: Party,
     pub buyer: Party,
+    pub currency: String,
+    pub sold_on: NaiveDate,
+    pub issued_at: Option<NaiveDateTime>,
 }
 
 #[test]
 fn test_deserialize_invoice_data() {
     let input = r#"
     {
+        "currency": "EUR",
+        "sold_on": "2022-08-15",
+        "issued_at": "2022-08-15T21:27:50",
         "buyer": {
             "name": "Test Buyer",
             "tax_id": "123456",

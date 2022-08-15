@@ -1,4 +1,7 @@
 {
+  "currency": "EUR",
+  "sold_on": "2022-08-15",
+  "issued_at": "2022-08-15T21:27:50",
   "buyer": {
     "name": "Test Buyer",
     "tax_id": "123456",
